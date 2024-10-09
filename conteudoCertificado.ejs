@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificado</title>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+        body {
+            display: flex;
+            justify-content: space-around;
+            font-family: "Inter", sans-serif;
+            background-color: #f5f4f5;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            gap: 20px;
+        }
+        h1 {
+            color: #e71d2b;
+            font-weight: 700;
+            font-size: 32px;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+        p {
+            line-height: 1.5;
+            text-align: left;
+            font-size: 18px;
+            margin: 0;
+            color: #716b6c;
+            font-weight: 500;
+
+        }
+        h2{
+            font-size: 38px;
+            margin-bottom: 12px;
+
+        }
+        .meio{
+            flex-direction: column;
+            padding: 50px 30px 0px 30px;
+            align-items: left;
+            gap: 10px;
+            height: 100vh;
+            margin-top: 40px;
+            width: 100vh;
+            flex-grow: 2;
+        }
+        .esquerda{
+            background-color: #e71d2b;
+            width: 15px;
+            height: 100vh;
+            border-radius: 0 0 60px 0;
+
+        }
+        .direita{
+            height: 100vh;
+            width: auto;
+            align-self: flex-end;
+        }
+        img {
+            width: 375px;
+            height: 100vh;
+            margin-top: 1px;
+        }
+    </style>
+</head>
+<body>
+        <div class="esquerda" >
+        </div>
+        <div class="meio">
+                <h1>Certificamos que</h1>
+                <h2><%= nomeAluno %></h2>
+                <p >Participou do curso Coletivo Online, programa do Instituto Coca-Cola Brasil de
+                    preparação para o mercado de trabalho, realizado no mês de  <%= mes %> do ano de <%= ano %>.</p>
+
+                <h2 style="padding-top: 30px;">Itinerário formativo</h2>
+                <p >
+                    Elaboração de plano de vida e de objetivos<br>
+                    Educação financeira, organização e planejamento<br>
+                    Comunicação no mundo digital: uso de redes sociais<br>
+                    Orientações para entrevistas de emprego<br>
+                    Elaboração de currículo e cadastro em sites de vagas de emprego<br>
+                    Direito Humanos e equidade racial<br>
+                    Compromisso com sua trajetória de vida
+                </p>
+
+    
+                <p style="padding-top: 30px;">Carga horária: <br>
+                11 horas online com vídeoaulas e atividades práticas.</p>
+        </div>
+        <div class="direita">
+            <img src="https://firebasestorage.googleapis.com/v0/b/coletivojovem-53215.appspot.com/o/assinatura.png?alt=media&token=5a26eae1-5f3c-46d5-9366-67079ca413b6" alt="Assinatura">
+        </div>
+</body>
+</html>
