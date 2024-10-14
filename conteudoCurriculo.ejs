@@ -26,13 +26,12 @@
         h3 {
             font-weight: 800;
             margin-top: 10px;
-            margin-bottom: 0px;
             letter-spacing: 1px;
             font-size: 16px;
         }
 
         .no-break {
-            page-break-inside: avoid; /* Evita quebra de página dentro deste bloco */
+            page-break-inside: avoid;
         }
     </style>
 </head>
@@ -96,6 +95,8 @@
 
     <div class="no-break">
         <h3>FORMAÇÃO COMPLEMENTAR</h3>
+        <p style="margin-bottom: 5px !important;">Coletivo Online - Preparação para o Mercado de Trabalho - Instituto Coca-Cola Brasil</p>
+        <p>Conclusão: <%= dataConclusao %></p>
         <% if (formacaoComplementar.length > 0) { %>
             <% formacaoComplementar.forEach(formacao => { %>
                 <p> <%= formacao %> </p>

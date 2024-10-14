@@ -102,7 +102,7 @@ app.post('/gerar-certificado_v2', async (req, res) => {
 
 
 app.post('/gerar-curriculo_v2', async (req, res) => {
-    const { nomeAluno, dataNascimento, rua, numero, cidade, uf, complemento, telefone, telefoneRecado, email, objetivos, caracteristicas, escolaridade, experienciaProfissional, formacaoComplementar, trabalhoVoluntario, idiomas, cpf } = req.body;
+    const { nomeAluno, dataNascimento, rua, numero, cidade, uf, complemento, telefone, telefoneRecado, email, objetivos, caracteristicas, escolaridade, experienciaProfissional, formacaoComplementar, trabalhoVoluntario, idiomas, cpf, dataConclusao } = req.body;
 
     if (!nomeAluno || !cpf) {
         return res.status(400).send("Parâmetros obrigatórios ausentes");
@@ -125,7 +125,8 @@ app.post('/gerar-curriculo_v2', async (req, res) => {
         experienciaProfissional,
         formacaoComplementar,
         trabalhoVoluntario,
-        idiomas
+        idiomas,
+        dataConclusao
     };
 
     try {
