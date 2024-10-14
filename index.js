@@ -82,7 +82,7 @@ async function gerarPDFCurriculo(dadosCurriculo, cpf) {
     }
 }
 
-app.post('/gerar-certificado', async (req, res) => {
+app.post('/gerar-certificado_v2', async (req, res) => {
     const { nomeAluno, mes, ano, cpf } = req.body;
 
     if (!nomeAluno || !mes || !ano || !cpf) {
@@ -101,7 +101,7 @@ app.post('/gerar-certificado', async (req, res) => {
 });
 
 
-app.post('/gerar-curriculo', async (req, res) => {
+app.post('/gerar-curriculo_v2', async (req, res) => {
     const { nomeAluno, dataNascimento, rua, numero, cidade, uf, complemento, telefone, telefoneRecado, email, objetivos, caracteristicas, escolaridade, experienciaProfissional, formacaoComplementar, trabalhoVoluntario, idiomas, cpf } = req.body;
 
     if (!nomeAluno || !cpf) {
