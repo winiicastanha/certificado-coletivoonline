@@ -8,23 +8,32 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-        body{
+        body {
             font-family: "Inter", sans-serif;
+            line-height: 1.6;
+        }
+        
+        p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
 
-        }
-        p{
-            margin: 5px;
-            line-height: 15px;
-        }
-        h1{
+        h1 {
             margin: 0;
+            font-size: 24px;
         }
-        h3{
+
+        h3 {
             font-weight: 800;
             margin-top: 10px;
+            margin-bottom: 0px;
             letter-spacing: 1px;
+            font-size: 16px;
         }
 
+        .no-break {
+            page-break-inside: avoid; /* Evita quebra de página dentro deste bloco */
+        }
     </style>
 </head>
 <body>
@@ -37,74 +46,88 @@
     <p>Email: <%= email %> </p>
     <br>
 
-    <h3>OBJETIVOS</h3>
-    <% if (objetivos.length > 0) { %>
-        <% objetivos.forEach(objetivo => { %>
-            <p> <%= objetivo %> </p>
-        <% }) %>
-    <% } else { %>
-        <p>Sem informações</p>
-    <% } %>
+    <div class="no-break">
+        <h3>OBJETIVOS</h3>
+        <% if (objetivos.length > 0) { %>
+            <% objetivos.forEach(objetivo => { %>
+                <p> <%= objetivo %> </p>
+            <% }) %>
+        <% } else { %>
+            <p>Sem informações</p>
+        <% } %>
+    </div>
     <br>
 
-    <h3>CARACTERÍSTICAS DO PERFIL</h3>
-    <% if (caracteristicas.length > 0) { %>
-        <% caracteristicas.forEach(caracteristica => { %>
-            <p> <%= caracteristica %> </p>
-        <% }) %>
-    <% } else { %>
-        <p>Sem informações</p>
-    <% } %>
+    <div class="no-break">
+        <h3>CARACTERÍSTICAS DO PERFIL</h3>
+        <% if (caracteristicas.length > 0) { %>
+            <% caracteristicas.forEach(caracteristica => { %>
+                <p> <%= caracteristica %> </p>
+            <% }) %>
+        <% } else { %>
+            <p>Sem informações</p>
+        <% } %>
+    </div>
     <br>
 
-    <h3>ESCOLARIDADE</h3>
-    <% if (escolaridade.length > 0) { %>
-        <% escolaridade.forEach(escola => { %>
-            <p> <%= escola %> </p>
-        <% }) %>
-    <% } else { %>
-        <p>Sem informações</p>
-    <% } %>
+    <div class="no-break">
+        <h3>ESCOLARIDADE</h3>
+        <% if (escolaridade.length > 0) { %>
+            <% escolaridade.forEach(escola => { %>
+                <p> <%= escola %> </p>
+            <% }) %>
+        <% } else { %>
+            <p>Sem informações</p>
+        <% } %>
+    </div>
     <br>
 
-    <h3>EXPERIÊNCIA PROFISSIONAL</h3>
-    <% if (experienciaProfissional.length > 0) { %>
-        <% experienciaProfissional.forEach(experiencia => { %>
-            <p> <%= experiencia %> </p>
-        <% }) %>
-    <% } else { %>
-        <p>Sem informações</p>
-    <% } %>
+    <div class="no-break">
+        <h3>EXPERIÊNCIA PROFISSIONAL</h3>
+        <% if (experienciaProfissional.length > 0) { %>
+            <% experienciaProfissional.forEach(experiencia => { %>
+                <p> <%= experiencia %> </p>
+            <% }) %>
+        <% } else { %>
+            <p>Sem informações</p>
+        <% } %>
+    </div>
     <br>
 
-    <h3>FORMAÇÃO COMPLEMENTAR</h3>
-    <% if (formacaoComplementar.length > 0) { %>
-        <% formacaoComplementar.forEach(formacao => { %>
-            <p> <%= formacao %> </p>
-        <% }) %>
-    <% } else { %>
-        <p>Sem informações</p>
-    <% } %>
+    <div class="no-break">
+        <h3>FORMAÇÃO COMPLEMENTAR</h3>
+        <% if (formacaoComplementar.length > 0) { %>
+            <% formacaoComplementar.forEach(formacao => { %>
+                <p> <%= formacao %> </p>
+            <% }) %>
+        <% } else { %>
+            <p>Sem informações</p>
+        <% } %>
+    </div>
     <br>
 
-    <h3>TRABALHO VOLUNTÁRIO</h3>
-    <% if (trabalhoVoluntario.length > 0) { %>
-        <% trabalhoVoluntario.forEach(trabalho => { %>
-            <p> <%= trabalho %> </p>
-        <% }) %>
-    <% } else { %>
-        <p>Sem informações</p>
-    <% } %>
+    <div class="no-break">
+        <h3>TRABALHO VOLUNTÁRIO</h3>
+        <% if (trabalhoVoluntario.length > 0) { %>
+            <% trabalhoVoluntario.forEach(trabalho => { %>
+                <p> <%= trabalho %> </p>
+            <% }) %>
+        <% } else { %>
+            <p>Sem informações</p>
+        <% } %>
+    </div>
     <br>
 
-    <h3>IDIOMAS</h3>
-    <% if (idiomas.length > 0) { %>
-        <% idiomas.forEach(idioma => { %>
-            <p> <%= idioma %> </p>
-        <% }) %>
-    <% } else { %>
-        <p>Sem informações</p>
-    <% } %>
+    <div class="no-break">
+        <h3>IDIOMAS</h3>
+        <% if (idiomas.length > 0) { %>
+            <% idiomas.forEach(idioma => { %>
+                <p> <%= idioma %> </p>
+            <% }) %>
+        <% } else { %>
+            <p>Sem informações</p>
+        <% } %>
+    </div>
     <br>
 </body>
 </html>
