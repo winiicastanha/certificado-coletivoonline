@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const ejs = require('ejs');
 const path = require('path');
-const fs = require('fs');
+const { salvarPDF } = require('../utils');
 
 async function gerarPDFCertificado(req, res) {
     const { nomeAluno, mes, ano, cpf } = req.body;
@@ -11,7 +11,7 @@ async function gerarPDFCertificado(req, res) {
     }
 
     try {
-        const html = await ejs.renderFile(path.join(__dirname, '../conteudoCertificado.ejs'), {
+        const html = await ejs.renderFile(path.join(__dirname, '../views/conteudoCertificado.ejs'), {
             nomeAluno, mes, ano
         });
 
@@ -28,19 +28,9 @@ async function gerarPDFCertificado(req, res) {
 
         await browser.close();
 
-        // Diretório do CPF
-        const cpfDir = path.join(__dirname, '../certificados', cpf);
-
-        // Criar o diretório, se não existir
-        if (!fs.existsSync(cpfDir)) {
-            fs.mkdirSync(cpfDir, { recursive: true });
-        }
-
-        // Caminho completo para o arquivo PDF
-        const filePath = path.join(cpfDir, `${cpf}-certificado.pdf`);
-        fs.writeFileSync(filePath, pdfBuffer);
-
+        const filePath = salvarPDF(cpf, 'certificado', pdfBuffer);
         const fileUrl = `${req.protocol}://${req.get('host')}/certificados/${cpf}/${path.basename(filePath)}`;
+
         return res.json({ url: fileUrl });
 
     } catch (error) {
