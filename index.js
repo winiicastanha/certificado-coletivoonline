@@ -6,8 +6,7 @@ const routes = require('./src/routes/routes');
 const app = express();
 app.use(bodyParser.json());
 
-app.use('/certificados', express.static(path.join(__dirname, 'certificados')));
-app.use('/curriculos', express.static(path.join(__dirname, 'curriculos')));
+app.use('/documentos', express.static(path.join(__dirname, 'documentos')));
 
 app.use('/', routes);
 

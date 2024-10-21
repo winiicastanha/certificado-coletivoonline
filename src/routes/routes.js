@@ -3,8 +3,11 @@ const path = require('path');
 const fs = require('fs');
 const certificadoController = require('../controllers/certificadoController');
 const curriculoController = require('../controllers/curriculoController');
+const uploadFotoPerfil  = require('../controllers/uploadFotoController');
 
 const router = express.Router();
+
+router.post('/upload/foto/:cpf', uploadFotoPerfil.uploadFotoPerfil);
 
 router.post('/gerar-certificado_v2', certificadoController.gerarPDFCertificado);
 
