@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Currículo de <%= nomeAluno %></title>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
@@ -39,15 +39,21 @@
     <h1> <%= nomeAluno %> </h1>
     <p>Data de nascimento: <%= dataNascimento %> </p>
     <p>Endereço: <%= rua %>, <%= numero %> - <%= cidade %>, <%= uf %></p>
-    <p>Complemento: <%= complemento %> </p>
+    <% if (complemento) { %>
+        <p>Complemento: <%= complemento %> </p>
+    <% } %>
     <p>Telefone: <%= telefone %> </p>
-    <p>Telefone de recado: <%= telefoneRecado %> </p>
+    <% if (telefoneRecado) { %>
+        <p>Telefone de recado: <%= telefoneRecado %> </p>
+    <% } %>
     <p>Email: <%= email %> </p>
     <br>
 
     <div class="no-break">
         <h3>OBJETIVOS</h3>
-        <% if (objetivos.length > 0) { %>
+        <% if (typeof objetivos === 'string') { %>
+            <p> <%= objetivos %> </p>
+        <% } else if (Array.isArray(objetivos) && objetivos.length > 0) { %>
             <% objetivos.forEach(objetivo => { %>
                 <p> <%= objetivo %> </p>
             <% }) %>
@@ -59,7 +65,9 @@
 
     <div class="no-break">
         <h3>CARACTERÍSTICAS DO PERFIL</h3>
-        <% if (caracteristicas.length > 0) { %>
+        <% if (typeof caracteristicas === 'string') { %>
+            <p> <%= caracteristicas %> </p>
+        <% } else if (Array.isArray(caracteristicas) && caracteristicas.length > 0) { %>
             <% caracteristicas.forEach(caracteristica => { %>
                 <p> <%= caracteristica %> </p>
             <% }) %>
@@ -71,7 +79,9 @@
 
     <div class="no-break">
         <h3>ESCOLARIDADE</h3>
-        <% if (escolaridade.length > 0) { %>
+        <% if (typeof escolaridade === 'string') { %>
+            <p> <%= escolaridade %> </p>
+        <% } else if (Array.isArray(escolaridade) && escolaridade.length > 0) { %>
             <% escolaridade.forEach(escola => { %>
                 <p> <%= escola %> </p>
             <% }) %>
@@ -83,7 +93,9 @@
 
     <div class="no-break">
         <h3>EXPERIÊNCIA PROFISSIONAL</h3>
-        <% if (experienciaProfissional.length > 0) { %>
+        <% if (typeof experienciaProfissional === 'string') { %>
+            <p> <%= experienciaProfissional %> </p>
+        <% } else if (Array.isArray(experienciaProfissional) && experienciaProfissional.length > 0) { %>
             <% experienciaProfissional.forEach(experiencia => { %>
                 <p> <%= experiencia %> </p>
             <% }) %>
@@ -97,7 +109,9 @@
         <h3>FORMAÇÃO COMPLEMENTAR</h3>
         <p style="margin-bottom: 5px !important;">Coletivo Online - Preparação para o Mercado de Trabalho - Instituto Coca-Cola Brasil</p>
         <p>Conclusão: <%= dataConclusao %></p>
-        <% if (formacaoComplementar.length > 0) { %>
+        <% if (typeof formacaoComplementar === 'string') { %>
+            <p> <%= formacaoComplementar %> </p>
+        <% } else if (Array.isArray(formacaoComplementar) && formacaoComplementar.length > 0) { %>
             <% formacaoComplementar.forEach(formacao => { %>
                 <p> <%= formacao %> </p>
             <% }) %>
@@ -109,7 +123,9 @@
 
     <div class="no-break">
         <h3>TRABALHO VOLUNTÁRIO</h3>
-        <% if (trabalhoVoluntario.length > 0) { %>
+        <% if (typeof trabalhoVoluntario === 'string') { %>
+            <p> <%= trabalhoVoluntario %> </p>
+        <% } else if (Array.isArray(trabalhoVoluntario) && trabalhoVoluntario.length > 0) { %>
             <% trabalhoVoluntario.forEach(trabalho => { %>
                 <p> <%= trabalho %> </p>
             <% }) %>
@@ -121,7 +137,9 @@
 
     <div class="no-break">
         <h3>IDIOMAS</h3>
-        <% if (idiomas.length > 0) { %>
+        <% if (typeof idiomas === 'string') { %>
+            <p> <%= idiomas %> </p>
+        <% } else if (Array.isArray(idiomas) && idiomas.length > 0) { %>
             <% idiomas.forEach(idioma => { %>
                 <p> <%= idioma %> </p>
             <% }) %>
