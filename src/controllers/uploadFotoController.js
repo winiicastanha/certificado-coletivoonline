@@ -24,7 +24,6 @@ const storage = multer.diskStorage({
   }
 });
 
-// Configurações do upload com limite de tamanho de 5MB
 const upload = multer({ 
   storage: storage,
   limits: { fileSize: 5 * 1024 * 1024 },
@@ -37,7 +36,6 @@ const upload = multer({
   }
 });
 
-// Função para o upload da foto de perfil
 const uploadFotoPerfil = (req, res) => {
   upload.single('foto')(req, res, function (err) {
     if (err instanceof multer.MulterError) {
@@ -46,7 +44,6 @@ const uploadFotoPerfil = (req, res) => {
       return res.status(500).json({ error: err.message });
     }
 
-    // Verificando se o arquivo foi recebido corretamente
     if (!req.file) {
       return res.status(400).json({ message: 'Nenhum arquivo foi enviado.' });
     }
