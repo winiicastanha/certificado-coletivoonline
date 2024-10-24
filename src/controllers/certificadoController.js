@@ -28,8 +28,9 @@ async function gerarPDFCertificado(req, res) {
 
         await browser.close();
 
+        // Defina o caminho do arquivo corretamente
         const filePath = salvarPDF(cpf, 'certificado', pdfBuffer);
-        const fileUrl = `${req.protocol === 'http' ? 'https' : req.protocol}://${req.get('host')}/documentos/${cpf}/certificado/${path.basename(normalizedPath)}`;
+        const fileUrl = `${req.protocol === 'https' ? 'https' : 'http'}://${req.get('host')}/documentos/${cpf}/certificado/${path.basename(filePath)}`;
 
         return res.json({ url: fileUrl });
 
