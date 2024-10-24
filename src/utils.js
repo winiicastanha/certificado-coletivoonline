@@ -11,7 +11,7 @@ function salvarPDF(cpf, tipo, pdfBuffer) {
     const filePath = path.join(dirPath, `${cpf}-${tipo}.pdf`);
     
     fs.writeFileSync(filePath, pdfBuffer);
-
+    console.log(`Arquivo salvo em: ${filePath}`);
     return filePath;
 }
 
