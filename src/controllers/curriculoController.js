@@ -78,7 +78,7 @@ async function gerarPDFCurriculo(req, res) {
         const filePath = salvarPDF(cpf, 'curriculo', pdfBuffer);
         const normalizedPath = path.normalize(filePath); // Normaliza o caminho
         // Ajuste para refletir o caminho correto com a subpasta curriculo
-        const fileUrl = `${req.protocol === 'http' ? 'https' : req.protocol}://${req.get('host')}/documentos/${cpf}/curriculo/${path.basename(normalizedPath)}`;
+        const fileUrl = `https://${req.get('host')}/documentos/${cpf}/curriculo/${path.basename(filePath)}`;
 
         console.log(`Caminho do arquivo salvo: ${normalizedPath}`);
         console.log(`URL do arquivo gerado: ${fileUrl}`);
