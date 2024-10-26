@@ -80,23 +80,24 @@ async function gerarPDFCurriculo(req, res) {
     }
 
     // Processando os dados do currículo
-    const parsedObjetivos = formatArrayToString(manualParseArrayString(objetivos), ['objetivo']);
-    const parsedCaracteristicas = formatArrayToString(manualParseArrayString(caracteristicas), ['caracteristica']);
-    const parsedEscolaridade = formatArrayToString(manualParseArrayString(escolaridade), [
+    const parsedObjetivos = objetivos && objetivos !== "[]" ? formatArrayToString(manualParseArrayString(objetivos), ['objetivo']) : "Sem informações";
+    const parsedCaracteristicas = caracteristicas && caracteristicas !== "[]" ? formatArrayToString(manualParseArrayString(caracteristicas), ['caracteristica']) : "Sem informações";
+    const parsedEscolaridade = escolaridade && escolaridade !== "[]" ? formatArrayToString(manualParseArrayString(escolaridade), [
         'nome_escola', 'nome_curso','nivel_escolaridade', 'situacao', 'ano_inicio_escolaridade', 'ano_fim_escolaridade'
-    ]);
-    const parsedExperienciaProfissional = experienciaProfissional === "Sem informações" ? "Sem informações" : formatArrayToString(manualParseArrayString(experienciaProfissional), [
+    ]) : "Sem informações";
+    const parsedExperienciaProfissional = experienciaProfissional && experienciaProfissional !== "[]" ? formatArrayToString(manualParseArrayString(experienciaProfissional), [
         'nome_empresa', 'nome_cargo', 'atividade_realizada', 'periodo_inicio', 'periodo_fim'
-    ]);
-    const parsedFormacaoComplementar = formacaoComplementar ? formatArrayToString(manualParseArrayString(formacaoComplementar), [
+    ]) : "Sem informações";
+    const parsedFormacaoComplementar = formacaoComplementar && formacaoComplementar !== "[]" ? formatArrayToString(manualParseArrayString(formacaoComplementar), [
         'nome_instituicao', 'nome_curso', 'data_conclusao'
     ]) : "Sem informações";
-    const parsedTrabalhoVoluntario = trabalhoVoluntario === "Sem informações" ? "Sem informações" : formatArrayToString(manualParseArrayString(trabalhoVoluntario), [
+    const parsedTrabalhoVoluntario = trabalhoVoluntario && trabalhoVoluntario !== "[]" ? formatArrayToString(manualParseArrayString(trabalhoVoluntario), [
         'nome_empresa_instituicao', 'atividade_realizada', 'periodo'
-    ]);
-    const parsedIdiomas = idiomas === "Sem informações" ? "Sem informações" : formatArrayToString(manualParseArrayString(idiomas), [
+    ]) : "Sem informações";
+    const parsedIdiomas = idiomas && idiomas !== "[]" ? formatArrayToString(manualParseArrayString(idiomas), [
         'idioma', 'fluencia'
-    ]);
+    ]) : "Sem informações";
+    
 
     const dadosCurriculo = {
         nomeAluno,
