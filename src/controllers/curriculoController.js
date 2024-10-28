@@ -39,14 +39,6 @@ async function gerarPDFCurriculo(req, res) {
         return res.status(400).json({ error: "Parâmetros obrigatórios ausentes" });
     }
 
-    // Funções de manipulação de strings
-    function parseStringToArray(str) {
-        if (typeof str === 'string' && str.trim()) {
-            return str.trim().split('\n').map(item => item.trim()).filter(item => item);
-        }
-        return [];
-    }
-
     function manualParseArrayString(arrayString) {
         if (typeof arrayString !== 'string') return "Sem informações";
 
