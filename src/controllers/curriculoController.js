@@ -1,30 +1,25 @@
 const puppeteer = require('puppeteer');
 const ejs = require('ejs');
 const path = require('path');
-const fs = require('fs'); // Módulo para manipular arquivos
+const fs = require('fs');
 const { salvarPDF } = require('../utils');
 
-// Função para salvar os dados do currículo em um arquivo JSON
 function salvarDadosCurriculo(dados) {
     const dirPath = path.join(__dirname, '../solicitacoes');
     const filePath = path.join(dirPath, 'curriculos.json');
     
-    // Verifica se o diretório 'data' existe, caso contrário, cria o diretório
     if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath, { recursive: true });
     }
     
-    // Carrega os dados atuais do arquivo, caso ele exista
     let curriculos = [];
     if (fs.existsSync(filePath)) {
         const data = fs.readFileSync(filePath, 'utf-8');
         curriculos = JSON.parse(data);
     }
 
-    // Adiciona o novo currículo aos dados
     curriculos.push(dados);
 
-    // Salva o arquivo atualizado
     fs.writeFileSync(filePath, JSON.stringify(curriculos, null, 2), 'utf-8');
 }
 
@@ -39,27 +34,6 @@ async function gerarPDFCurriculo(req, res) {
         return res.status(400).json({ error: "Parâmetros obrigatórios ausentes" });
     }
 
-    function manualParseArrayString(arrayString) {
-        if (typeof arrayString !== 'string') return "Sem informações";
-
-        try {
-            const items = arrayString
-                .replace(/^\[|\]$/g, '')
-                .split(/},\s*{/)
-                .map(item => {
-                    const obj = {};
-                    item.replace(/(\w+):\s*([^,}]+)/g, (match, key, value) => {
-                        obj[key.trim()] = value.replace(/null/g, "").trim();
-                    });
-                    return obj;
-                });
-            return items;
-        } catch (error) {
-            console.error("Erro ao converter manualmente a string para array:", error);
-            return "Sem informações";
-        }
-    }
-
     function formatArrayToString(array, fields) {
         if (!Array.isArray(array)) return "Sem informações";
         
@@ -71,25 +45,23 @@ async function gerarPDFCurriculo(req, res) {
         }).join('\n');
     }
 
-    // Processando os dados do currículo
-    const parsedObjetivos = objetivos && objetivos !== "[]" ? formatArrayToString(manualParseArrayString(objetivos), ['objetivo']) : "Sem informações";
-    const parsedCaracteristicas = caracteristicas && caracteristicas !== "[]" ? formatArrayToString(manualParseArrayString(caracteristicas), ['caracteristica']) : "Sem informações";
-    const parsedEscolaridade = escolaridade && escolaridade !== "[]" ? formatArrayToString(manualParseArrayString(escolaridade), [
+    const parsedObjetivos = objetivos.length ? formatArrayToString(objetivos, ['objetivo']) : "Sem informações";
+    const parsedCaracteristicas = caracteristicas.length ? formatArrayToString(caracteristicas, ['caracteristica']) : "Sem informações";
+    const parsedEscolaridade = escolaridade.length ? formatArrayToString(escolaridade, [
         'nome_escola', 'nome_curso','nivel_escolaridade', 'situacao', 'ano_inicio_escolaridade', 'ano_fim_escolaridade'
     ]) : "Sem informações";
-    const parsedExperienciaProfissional = experienciaProfissional && experienciaProfissional !== "[]" ? formatArrayToString(manualParseArrayString(experienciaProfissional), [
+    const parsedExperienciaProfissional = experienciaProfissional.length ? formatArrayToString(experienciaProfissional, [
         'nome_empresa', 'nome_cargo', 'atividade_realizada', 'periodo_inicio', 'periodo_fim'
     ]) : "Sem informações";
-    const parsedFormacaoComplementar = formacaoComplementar && formacaoComplementar !== "[]" ? formatArrayToString(manualParseArrayString(formacaoComplementar), [
+    const parsedFormacaoComplementar = formacaoComplementar.length ? formatArrayToString(formacaoComplementar, [
         'nome_instituicao', 'nome_curso', 'data_conclusao'
     ]) : "Sem informações";
-    const parsedTrabalhoVoluntario = trabalhoVoluntario && trabalhoVoluntario !== "[]" ? formatArrayToString(manualParseArrayString(trabalhoVoluntario), [
+    const parsedTrabalhoVoluntario = trabalhoVoluntario.length ? formatArrayToString(trabalhoVoluntario, [
         'nome_empresa_instituicao', 'atividade_realizada', 'periodo'
     ]) : "Sem informações";
-    const parsedIdiomas = idiomas && idiomas !== "[]" ? formatArrayToString(manualParseArrayString(idiomas), [
+    const parsedIdiomas = idiomas.length ? formatArrayToString(idiomas, [
         'idioma', 'fluencia'
     ]) : "Sem informações";
-    
 
     const dadosCurriculo = {
         nomeAluno,
@@ -102,17 +74,18 @@ async function gerarPDFCurriculo(req, res) {
         telefone,
         telefoneRecado,
         email,
-        objetivos: Array.isArray(parsedObjetivos) ? parsedObjetivos.join('<br>') : parsedObjetivos,  
-        caracteristicas: Array.isArray(parsedCaracteristicas) ? parsedCaracteristicas.join('<br>') : parsedCaracteristicas,  
-        escolaridade: Array.isArray(parsedEscolaridade) ? parsedEscolaridade.join('<br>') : parsedEscolaridade, 
-        experienciaProfissional: Array.isArray(parsedExperienciaProfissional) ? parsedExperienciaProfissional.join('<br>') : parsedExperienciaProfissional,
-        formacaoComplementar: Array.isArray(parsedFormacaoComplementar) ? parsedFormacaoComplementar.join('<br>') : parsedFormacaoComplementar,
-        trabalhoVoluntario: Array.isArray(parsedTrabalhoVoluntario) ? parsedTrabalhoVoluntario.join('<br>') : parsedTrabalhoVoluntario,
-        idiomas: Array.isArray(parsedIdiomas) ? parsedIdiomas.join('<br>') : parsedIdiomas,
+        objetivos: parsedObjetivos,  
+        caracteristicas: parsedCaracteristicas,  
+        escolaridade: parsedEscolaridade, 
+        experienciaProfissional: parsedExperienciaProfissional,
+        formacaoComplementar: parsedFormacaoComplementar,
+        trabalhoVoluntario: parsedTrabalhoVoluntario,
+        idiomas: parsedIdiomas,
         dataConclusao,
         criado_em: new Date().toISOString()
-    };    
+    };
 
+    console.log(dadosCurriculo);
     salvarDadosCurriculo(dadosCurriculo);
 
     let browser;
