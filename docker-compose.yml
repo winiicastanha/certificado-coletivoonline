@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    container_name: node_app_certificado
+    working_dir: /app
+    ports:
+      - "3500:3500"
+    environment:
+      NODE_ENV: production
+    volumes:
+      - certificado:/app
+      # - /usr/src/app/node_modules
+      - ./documentos:/app/documentos
+volumes:
+  certificado:    
